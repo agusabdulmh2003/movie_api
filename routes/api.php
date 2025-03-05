@@ -4,6 +4,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 
 Route::prefix('movies')->group(function () {
 
@@ -35,3 +36,7 @@ Route::prefix('orders')->group(function () {
     Route::put('/{id}', [OrderController::class, 'update']);
     Route::delete('/{id}', [OrderController::class, 'destroy']);
 });
+
+
+Route::post('/payment', [PaymentController::class, 'createTransaction']);
+Route::post('/payment/notification', [PaymentController::class, 'handleNotification']);
