@@ -40,3 +40,16 @@ Route::prefix('orders')->group(function () {
 
 Route::post('/payment', [PaymentController::class, 'createTransaction']);
 Route::post('/payment/notification', [PaymentController::class, 'handleNotification']);
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('movies/{id}/rate', [RatingController::class, 'rateMovie']);
+    Route::get('movies/{id}/ratings', [RatingController::class, 'getMovieRatings']);
+    Route::get('movies/recommended', [MovieController::class, 'getRecommendedMovies']);
+    Route::get('movies/trending', [MovieController::class, 'getTrendingMovies']);
+
+    Route::get('statistics/movie-sales', [StatisticsController::class, 'movieSales']);
+    Route::get('statistics/daily-sales', [StatisticsController::class, 'dailySales']);
+    Route::get('statistics/monthly-revenue', [StatisticsController::class, 'monthlyRevenue']);
+    Route::get('statistics/movie-viewers', [StatisticsController::class, 'movieViewers']);
+});
